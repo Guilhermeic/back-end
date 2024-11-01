@@ -106,31 +106,53 @@
 
 // 
 
-const usuarios = [
-{email: 'guilhermefreitalves@gmail.com', senha: '12345678'},
-{email: 'guilhermealvesfreitas@gmail.com', senha: '12345678'}
+// const usuarios = [
+//   { email: 'guilhermealvesfreitas@gmail.com', senha: '123456789' }
+// ]
+
+// const login = (email, senha) => {
+//   try {
+//     const usuario = (user => user.email === email);
+
+//     if (usuario) {
+//       return { success: false, message: 'Usuário nãp encontrado' };
+//     }
+
+//     if (usuario.senha === senha) {
+//       const token = `token-${usuario.id}`;
+//       return { success: true, token, message: `login realido com sucesso` };
+//     } else {
+//       return { success: false, message: `Senha incorreta` };
+//     }
+//   } catch (erro) {
+//     console.error("Erro no processo de login", erro.message);
+//     return { success: false, message: 'Erro no servidor' };
+//   }
+// };
+
+// console.log(login('guilhermealvesfreitas@gmail.com', '123456789'));
+// console.log(login('guilhermefreitalves@gmail.com', 'senhaErrada'));
+// console.log(login('guilhermefreitalves123@gmail.com', 'senha123'));
+
+
+
+const express = require('express');
+const app = express();
+const PORT = 3000;
+
+app.use (express.json());
+
+// criei um json dentro de um array
+const products = [
+{id: 1, nome: 'produto A', preco: 100},
+{id: 2, nome: 'produto b', preco: 200},
+{id: 3, nome: 'produto c', preco: 300}
 ]
 
-const login = (email, senha) => {
-  try {
-    const usuario = usuarios.find(user => user.email === email);
+app.get('/produtos', (req, res) => {
+  res.json(products); 
+});
 
-    if(!usuario) {
-      return{success: false, message: 'Usuário nãp encontrado'};
-    }
-
-    if(usuario.senha === senha) {
-      const token = `token-${usuario.id}-${Date.now()}`;
-      return{success: true, token, message: `login realido com sucesso`};
-    }else{
-      return{success: false, message: `Senha incorreta`};
-    }
-  }catch(erro) {
-    console.error("Erro no processo de login",erro.message);
-    return{success: false, message: 'Erro no servidor'};
-  }
-} ;
-
-console.log(login('guilhermefreitalves@gmail.com', '12345678'));
-console.log(login('guilhermefreitalves@gmail.com', 'senhaErrada'));
-console.log(login('guilhermefreitalves123@gmail.com', 'senha123'));
+app.listen(PORT, () => {
+  console.log(`Servidor rodando na porta ${PORT}`);
+});
