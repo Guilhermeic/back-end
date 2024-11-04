@@ -4,8 +4,8 @@ const Login = async (req, res, next) => {
         const senha = req.body.senha
 
         const emailUser = ' gui@exemplo.com'
-        const senhalUser = '123456'
-        if (email == emailUser && senha == senhalUser) {
+        const senhaUser = '123456'
+        if (email === emailUser && senha ===  senhaUser) {
             const jwt = require('jsonwebtoken')
             const token = jwt.sign({ id: 1, name: 'Gui' }, '470218')
 
@@ -16,9 +16,9 @@ const Login = async (req, res, next) => {
             })
         } else {
             res.send({
-                'sucess': true,
-                'token': '',
-                'error': 'Email e senha inválidos!'
+                sucess: true,
+                token: '',
+                error: 'Email e senha inválidos!'
             })
         }
 
