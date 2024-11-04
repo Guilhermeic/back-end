@@ -1,13 +1,37 @@
-// // // IMPORTANDO O MÓDULO EXPRESS 
-// // const express = require('express')
-// // // APP RECEBE O EXPRESS
-// // const app = express()
-// // // PERMITE QUE O SERVIDOR ENTENDA JSON NO CORPO DAS REQUISIÇÕES
-// // app.use(express.json())
-// // // CRIANDO UMA ROTA PARA A API
-// // app.get('/home', (req, res) => {
-// //     res.send('Hello World')
-// // })
+// IMPORTANDO O MÓDULO EXPRESS 
+const express = require('express')
+// APP RECEBE O EXPRESS
+const app = express()
+// PERMITE QUE O SERVIDOR ENTENDA JSON NO CORPO DAS REQUISIÇÕES
+app.use(express.json())
+
+// EXPORTAR ROTAS
+const login = require('./routes/RouterLogin') // IMPORTANDO A ROTA
+app.use('/login', login)
+
+// SUBINDO O SERVIDOR NA PORTA 3000
+const PORT = 3000
+app.listen(PORT, () => {
+  console.log(`O servidor está rodando na porta ${PORT}`)
+})
+
+
+
+
+// CRIANDO UMA ROTA PARA A API
+app.get('/home', (req, res) => {
+  res.send('Hello World')
+})
+
+
+
+
+
+
+
+
+
+
 
 // // app.get('/states', (req, res) => {
 // //     res.send({
@@ -104,7 +128,7 @@
 
 // // RESPOSTA:
 
-// 
+//
 
 // const usuarios = [
 //   { email: 'guilhermealvesfreitas@gmail.com', senha: '123456789' }
@@ -135,24 +159,56 @@
 // console.log(login('guilhermefreitalves123@gmail.com', 'senha123'));
 
 
+// 1 CRIAR ROTA DE PRODUTOS
+// 2 CRIAR ROTA DE LOGIN
+// 3 CRIAR ROTA DE PRODUTOS CONTROLADA POR TOKEN
 
-const express = require('express');
-const app = express();
-const PORT = 3000;
 
-app.use (express.json());
+// const express = require('express');
+// const app = express();
+// const PORT = 3000;
 
-// criei um json dentro de um array
-const products = [
-{id: 1, nome: 'produto A', preco: 100},
-{id: 2, nome: 'produto b', preco: 200},
-{id: 3, nome: 'produto c', preco: 300}
-]
+// app.use(express.json());
 
-app.get('/produtos', (req, res) => {
-  res.json(products); 
-});
+// // criei um json dentro de um array
+// const products = [
+//   { id: 1, nome: 'produto A', preco: 100 },
+//   { id: 2, nome: 'produto b', preco: 200 },
+//   { id: 3, nome: 'produto c', preco: 300 }
+// ]
 
-app.listen(PORT, () => {
-  console.log(`Servidor rodando na porta ${PORT}`);
-});
+// app.get('/produtos', (req, res) => {
+//   res.json(products);
+// });
+
+// app.listen(PORT, () => {
+//   console.log(`Servidor rodando na porta ${PORT}`);
+// });
+
+// app.get('/login', (req, res) => {
+//   try {
+//     const email = req.query.email
+//     const senha = req.query.senha
+
+//     const emailUser = 'gui@exemplo.com.br'
+//     const senhaUser = '123456'
+
+//     if (email === emailUser && senha === senhaUser) {
+//       const jwt = require('jsonwebtoken')
+//       const token = jwt.sign({ id: 1, name: 'Gui' }, '470218')
+
+//       res.send({
+//         'sucess': true,
+//         'token':token,
+//         'error': ''
+//       })
+//     } else {
+//       res.send({
+//         'sucess': true,
+//         'token':'',
+//         'error': 'usuário ou senha invalida'
+
+//       });
+//     };
+//   }
+// })
