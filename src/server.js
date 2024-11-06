@@ -8,9 +8,12 @@ app.use(express.json())
 // EXPORTAR ROTAS
 const login = require('./routes/RouterLogin') 
 const product = require('./routes/RouterProducts')
+const users = require('./routes/RouterUsers')
+
 // IMPORTANDO A ROTA
 app.use('/login', login)
 app.use('/product', product)
+app.use('/users', users)
 
 // SUBINDO O SERVIDOR NA PORTA 3000
 const PORT = 3000
