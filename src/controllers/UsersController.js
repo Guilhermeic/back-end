@@ -1,13 +1,24 @@
 
+const UserModel = require('../models/UserModel')
+
 const userCreate = async (req, res, next) => {
     try {
-        const nome = req.body.nome
+        const firstname = req.body.firstname
+        const surname = req.body.surname
         const email = req.body.email
-        const senha = req.body.senha
+        const password = req.body.password
 
-        res.send({
+        const user = await UserModel.create({
+            firstname: firstname,
+            surname: surname,
+            email: email,
+            password: password
+        });
+
+
+        res.status(201).send({
             'sucess': true,
-            'message': 'usuário cadastrado com sucesso'
+            'message':  `usuário cadastrado com sucesso! ID: ${user.id - user.name}`
         })
     } catch (error) {
         res.send({
@@ -18,6 +29,7 @@ const userCreate = async (req, res, next) => {
 }
 
 const userList = async (req, res, next) => {
+    console.log('asuag')
     try {
         res.send([
             {
@@ -37,8 +49,6 @@ const userList = async (req, res, next) => {
     }
 
 }
-
-
 
 module.exports = {
     userCreate,

@@ -9,12 +9,13 @@ app.use(express.json())
 const login = require('./routes/RouterLogin') 
 const product = require('./routes/RouterProducts')
 const users = require('./routes/RouterUsers')
+const category = require('./routes/RouterCategory')
 
 // IMPORTANDO A ROTA
 app.use('/login', login)
 app.use('/product', product)
 app.use('/users', users)
-
+app.use('/category', category)
 // SUBINDO O SERVIDOR NA PORTA 3000
 const PORT = 3000
 app.listen(PORT, () => {

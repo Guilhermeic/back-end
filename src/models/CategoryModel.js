@@ -1,25 +1,22 @@
 const connection = require('../config/database/connection')
 const { DataTypes } = require('sequelize')
 
-let UserModel = connection.define('user', {
-    firstname: {
+let CategoryModel = connection.define('category', {
+    name: {
         type: DataTypes.STRING(50),
         allowNull: false
+    },
+    slug: {
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
+    use_in_menu: {
+        type: DataTypes.STRING(50),
+        allowNull: false
+    },
 
-    },
-    surname: {
-        type: DataTypes.STRING(50),
-        allowNull: false
-    },
-    email: {
-        type: DataTypes.STRING(50),
-        allowNull: false
-    },
-    password: {
-        type: DataTypes.STRING(50),
-        allowNull: false
-    }
+
 });
 
-module.exports = UserModel
+module.exports = CategoryModel
 
