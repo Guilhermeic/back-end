@@ -10,6 +10,7 @@ const login = require('./routes/RouterLogin')
 const product = require('./routes/RouterProducts')
 const users = require('./routes/RouterUsers')
 const category = require('./routes/RouterCategory')
+const address = require('./routes/RouterAddress')
 
 // IMPORTANDO A ROTA
 app.use('/login', login)

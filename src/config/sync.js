@@ -2,3 +2,6 @@ const connection = require('./database/connection') // importando aconexão com 
 
 require('../models/UserModel') 
 require('../models/CategoryModel')
+require('../models/AddressModel')
+
+connection.sync({alter: true})

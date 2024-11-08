@@ -1,11 +1,26 @@
+const userModel = require('../models/UserModel')
+
 const Login = async (req, res, next) => {
     try {
         const email = req.body.email
         const senha = req.body.senha
 
-        const emailUser = ' gui@exemplo.com'
-        const senhaUser = '123456'
-        if (email === emailUser && senha ===  senhaUser) {
+        //RETORNANDO UM USUÁRIO COM O EMAIL INFORMADO
+        const bcrypt = require('bcrypt')
+        const user = await userModel.findOne({
+            where: { email }
+        })
+
+        console.log(user
+
+        )
+
+        const userPassword = user ? user.password : ''
+        const hashValid = await bcrypt.compare(senha, userPassword)
+
+
+
+        if (hashValid) {
             const jwt = require('jsonwebtoken')
             const token = jwt.sign({ id: 1, name: 'Gui' }, '470218')
 
@@ -21,6 +36,9 @@ const Login = async (req, res, next) => {
                 error: 'Email e senha inválidos!'
             })
         }
+
+        const emailUser = ' gui@exemplo.com'
+        const senhaUser = '123456'
 
     } catch (error) {
         res.sen({
