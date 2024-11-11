@@ -14,7 +14,7 @@ const addressCreate = async (req, res, _next) => {
 
         res.send({
             'sucess': true,
-            'message':  `categoria cadastrado com sucesso!`
+            'message':  `categoria cadastrada com sucesso!`
         })
     } catch (error) {
         res.send({

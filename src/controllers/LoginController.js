@@ -11,9 +11,7 @@ const Login = async (req, res, next) => {
             where: { email }
         })
 
-        console.log(user
-
-        )
+        console.log(user)
 
         const userPassword = user ? user.password : ''
         const hashValid = await bcrypt.compare(senha, userPassword)
@@ -49,6 +47,49 @@ const Login = async (req, res, next) => {
     }
 }
 
+const LoginUpdate = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const login = await UserModel.update(req.body, {
+            where: { id }
+        })
+
+        res.status(201).send({
+            'sucess': true,
+            'message': `login alterado com sucessso! ID: ${login.id - login.name}`
+        })
+
+    } catch (error) {
+        res.send({
+            'succes': false,
+            'error': `erro na requisição ${error}`
+        })
+    }
+}
+
+const LoginDelete = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const login = await UserModel.destroy({
+            where: { id }
+        })
+
+        res.status(200).send({
+            'sucess': true,
+            'message': `Login deletado com sucessso! ID: ${login.id - login.name}`
+        })
+
+    } catch (error) {
+        res.send({
+            'succes': false,
+            'error': `erro na requisição ${error}`
+        })
+    }
+}
+
+
 module.exports = {
-    Login
+    Login,
+    LoginDelete,
+    LoginUpdate
 }

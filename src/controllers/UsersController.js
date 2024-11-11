@@ -3,7 +3,7 @@ const UserModel = require('../models/UserModel')
 
 const userCreate = async (req, res, next) => {
     try {
-        
+
         const firstname = req.body.firstname
         const surname = req.body.surname
         const email = req.body.email
@@ -14,7 +14,7 @@ const userCreate = async (req, res, next) => {
         const saltRound = 10
         const hash = await bcrypt.hash(password, saltRound)
 
-        
+
         const user = await UserModel.create({
             firstname: firstname,
             surname: surname,
@@ -57,7 +57,49 @@ const userList = async (req, res, next) => {
 
 }
 
+const UserUpdate = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const user = await UserModel.update(req.body, {
+            where: { id }
+        })
+
+        res.status(201).send({
+            'sucess': true,
+            'message': `Usuário alterado com sucessso! ID: ${user.id - user.name}`
+        })
+
+    } catch (error) {
+        res.send({
+            'succes': false,
+            'error': `erro na requisição ${error}`
+        })
+    }
+}
+
+const UserDelete = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const user = await UserModel.destroy({
+            where: { id }
+        })
+
+        res.status(200).send({
+            'sucess': true,
+            'message': `Usuário deletado com sucessso! ID: ${user.id - user.name}`
+        })
+
+    } catch (error) {
+        res.send({
+            'succes': false,
+            'error': `erro na requisição ${error}`
+        })
+    }
+}
+
 module.exports = {
     userCreate,
-    userList
+    userList,
+    UserUpdate,
+    UserDelete
 }

@@ -3,11 +3,10 @@ const router = express.Router('')
 const product = require('../controllers/ProductController')
 const users = require('../controllers/UsersController')
 
-// router.post('/', ProductController.product)
+
 router.get('/', users.userList);
 router.post('/', users.userCreate);
-
-// router.delete('/', LoginController.Login)
-// router.put('/', LoginController.Login)
+router.put('/:id',users.UserUpdate);
+router.delete('/:id',users.UserDelete);
 
 module.exports = router
