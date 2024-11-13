@@ -44,7 +44,50 @@ const categoryList = async (req, res, next) => {
 
 }
 
+const categoryUpdate = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const user = await UserModel.update(req.body, {
+            where: { id }
+        })
+
+        res.status(201).send({
+            'sucess': true,
+            'message': `categoria alterado com sucessso! ID: ${user.id - user.name}`
+        })
+
+    } catch (error) {
+        res.send({
+            'succes': false,
+            'error': `erro na requisição ${error}`
+        })
+    }
+}
+
+const categoryDelete = async (req, res, next) => {
+    try {
+        const id = req.params.id
+        const user = await UserModel.destroy({
+            where: { id }
+        })
+
+        res.status(200).send({
+            'sucess': true,
+            'message': `categoria deletado com sucessso! ID: ${user.id - user.name}`
+        })
+
+    } catch (error) {
+        res.send({
+            'succes': false,
+            'error': `erro na requisição ${error}`
+        })
+    }
+}
+
+
 module.exports = {
     categoryList,
-    categoryCreate
+    categoryCreate,
+    categoryDelete,
+    categoryUpdate
 }

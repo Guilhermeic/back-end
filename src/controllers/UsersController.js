@@ -1,7 +1,7 @@
 
 const UserModel = require('../models/UserModel')
 
-const userCreate = async (req, res, next) => {
+const UserCreate = async (req, res, next) => {
     try {
 
         const firstname = req.body.firstname
@@ -35,7 +35,7 @@ const userCreate = async (req, res, next) => {
     }
 }
 
-const userList = async (req, res, next) => {
+const UserList = async (req, res, next) => {
     console.log('asuag')
     try {
         res.send([
@@ -98,8 +98,8 @@ const UserDelete = async (req, res, next) => {
 }
 
 module.exports = {
-    userCreate,
-    userList,
+    UserCreate,
+    UserList,
     UserUpdate,
     UserDelete
 }
